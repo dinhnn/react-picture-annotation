@@ -360,8 +360,9 @@ export default class ReactPictureAnnotation extends React.Component<
           this.currentImageElement.height * scale
         );
       } else {
-        const nextImageNode = document.createElement("img");
-        nextImageNode.addEventListener("load", () => {
+        const nextImageNode =  new Image();
+        nextImageNode.crossOrigin = "anonymous";
+        nextImageNode.onload = (() => {
           this.currentImageElement = nextImageNode;
           const { width, height } = nextImageNode;
           const imageNodeRatio = height / width;
